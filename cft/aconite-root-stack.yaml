@@ -431,41 +431,41 @@ Resources:
         Value: !Ref GitHubSHA
       - Key: StackName
         Value: !Ref StackName
-  # AconiteStateMachine:
-  #   Type: AWS::StepFunctions::StateMachine
-  #   Properties:
-  #     StateMachineName: !Sub '${ProjectName}-${StepFunctionBaseName}-${Environment}-${AWS::Region}${CiBuild}'
-  #     LoggingConfiguration:
-  #       Level: ALL
-  #       IncludeExecutionData: True
-  #       Destinations:
-  #         - CloudWatchLogsLogGroup:
-  #             LogGroupArn: !GetAtt AconiteStateMachineLogGroup.Arn
-  #     DefinitionS3Location:
-  #       Bucket: !Ref CodeRepositoryS3Bucket
-  #       Key: !Sub '${GitHubRepository}/state-machine/state-machine.asl.json'
-  #     DefinitionSubstitutions:
-  #       LambdaFunctionArn: !GetAtt AconiteLambdaFunction.Outputs.LambdaFunctionArn
-  #     RoleArn: !GetAtt AconiteIAMRole.Outputs.StepFunctionExecutionRoleArn
-  #     Tags: 
-  #     - Key: ProjectName
-  #       Value: !Ref ProjectName
-  #     - Key: Environment
-  #       Value: !Ref Environment
-  #     - Key: GitHubRepository
-  #       Value: !Ref GitHubRepository
-  #     - Key: CodeRepositoryS3Bucket
-  #       Value: !Ref CodeRepositoryS3Bucket
-  #     - Key: GitHubRef
-  #       Value: !Ref GitHubRef
-  #     - Key: GitHubURL
-  #       Value: !Ref GitHubURL
-  #     - Key: GitHubWFRunNumber
-  #       Value: !Ref GitHubWFRunNumber
-  #     - Key: GitHubSHA
-  #       Value: !Ref GitHubSHA
-  #     - Key: StackName
-  #       Value: !Ref StackName
+  AconiteStateMachine:
+    Type: AWS::StepFunctions::StateMachine
+    Properties:
+      StateMachineName: !Sub '${ProjectName}-${StepFunctionBaseName}-${Environment}-${AWS::Region}${CiBuild}'
+      LoggingConfiguration:
+        Level: ALL
+        IncludeExecutionData: True
+        Destinations:
+          - CloudWatchLogsLogGroup:
+              LogGroupArn: !GetAtt AconiteStateMachineLogGroup.Arn
+      DefinitionS3Location:
+        Bucket: !Ref CodeRepositoryS3Bucket
+        Key: !Sub '${GitHubRepository}/state-machine/state-machine.asl.json'
+      DefinitionSubstitutions:
+        LambdaFunctionArn: !GetAtt AconiteLambdaFunction.Outputs.LambdaFunctionArn
+      RoleArn: !GetAtt AconiteIAMRole.Outputs.StepFunctionExecutionRoleArn
+      Tags: 
+      - Key: ProjectName
+        Value: !Ref ProjectName
+      - Key: Environment
+        Value: !Ref Environment
+      - Key: GitHubRepository
+        Value: !Ref GitHubRepository
+      - Key: CodeRepositoryS3Bucket
+        Value: !Ref CodeRepositoryS3Bucket
+      - Key: GitHubRef
+        Value: !Ref GitHubRef
+      - Key: GitHubURL
+        Value: !Ref GitHubURL
+      - Key: GitHubWFRunNumber
+        Value: !Ref GitHubWFRunNumber
+      - Key: GitHubSHA
+        Value: !Ref GitHubSHA
+      - Key: StackName
+        Value: !Ref StackName
 Outputs:
   AconiteVpcId: 
     Description: VPC Id
@@ -500,6 +500,6 @@ Outputs:
   AconiteStepFunctionLogGroupArn:
     Description: Step Function Log Group Arn
     Value: !GetAtt AconiteStateMachineLogGroup.Arn
-  # AconiteStepFunctionArn: 
-  #   Description: Step Function Arn
-  #   Value: !Ref DaylilyStateMachine
+  AconiteStepFunctionArn: 
+    Description: Step Function Arn
+    Value: !Ref AconiteStateMachine
