@@ -496,7 +496,7 @@ Outputs:
     Value: !GetAtt AconiteIAMRole.Outputs.StepFunctionExecutionRoleArn
   AconiteLambdaFunctionArn:
     Description: The Integration Lambda Function Arn
-    Value: !GetAtt DaylilyLambdaFunction.Outputs.LambdaFunctionArn
+    Value: !GetAtt AconiteLambdaFunction.Outputs.LambdaFunctionArn
   AconiteStepFunctionLogGroupArn:
     Description: Step Function Log Group Arn
     Value: !GetAtt AconiteStateMachineLogGroup.Arn
